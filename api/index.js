@@ -3,7 +3,8 @@ const cors = require('cors');
 const catalogoRoutes = require('./Modulo_Catalogo');
 const pedidosRoutes = require('./pedidos'); // Importas el archivo que creamos
 const reportesRoutes = require('./reportes'); // Importas el archivo que creamos
-
+const personasRoutes = require('./Modulo_Personas'); // Importas el archivo de personas
+const inventarioRoutes = require('./Modulo_Inventario'); // Importas el archivo de inventario
 
 
 // const personasRoutes = require('./Modulo_personas'); // Así agregarás el de tu compañero
@@ -19,7 +20,8 @@ app.use(express.json()); // Entender JSON que viene del Body
 app.use('/api/catalogo', catalogoRoutes);
 app.use('/api/pedidos', pedidosRoutes);    // Nueva ruta de Pedidos
 app.use('/api/reportes', reportesRoutes);    // Nueva ruta de Reportes
-
+app.use('/api/personas', personasRoutes); // Ruta para personas
+app.use('/api/inventario', inventarioRoutes); // Ruta para inventario
 
 // Iniciar Servidor
 app.listen(PORT, () => {
