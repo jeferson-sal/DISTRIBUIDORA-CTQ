@@ -8,6 +8,11 @@ const inventarioRoutes = require('./Modulo_Inventario'); // Importas el archivo 
 const rolesRoutes = require('./roles'); // Importas el archivo de roles
 const objetosRoutes = require('./objetos'); // Importas el archivo de objetos
 const permisosRoutes = require('./permisos'); // Importas el archivo de permisos
+const usuariosRoutes = require('./usuarios');//     
+const bitacoraRoutes = require('./bitacora');
+const backupsRoutes = require('./backups');
+
+
 
 const app = express();
 const PORT = 3000; // Node correrá en el puerto 3000 (Laravel usa el 8000)
@@ -25,6 +30,10 @@ app.use('/api/inventario', inventarioRoutes); // Ruta para inventario
 app.use('/api/roles', rolesRoutes); // Ruta para roles
 app.use('/api/objetos', objetosRoutes); // Ruta para objetos
 app.use('/api/permisos', permisosRoutes); // Ruta para permisos
+app.use('/api/usuarios', usuariosRoutes);
+app.use('/api/bitacora', bitacoraRoutes);
+app.use('/api/backups', backupsRoutes);
+
 
 // Iniciar Servidor
 app.listen(PORT, () => {
