@@ -2,47 +2,38 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable; // Esto es para el 2FA
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, TwoFactorAuthenticatable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    // 1. Dile a Laravel el nombre real de tu tabla
+    protected $table = 'tbl_usuario';
+
+    // 2. Dile cuál es la llave primaria (por defecto es 'id', la tuya es 'COD_USUARIO')
+    protected $primaryKey = 'COD_USUARIO';
+
+    // 3. Dile qué columnas se pueden llenar
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'FK_COD_PERSONA',
+        'FK_COD_ROL',
+        'USR_USUARIO',
+        'PASSWORD_HASH',
+        'ESTADO_USUARIO',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
-        'password',
+        'PASSWORD_HASH',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    // 4. IMPORTANTE: Laravel busca la columna 'password'. Como la tuya se llama 'PASSWORD_HASH', hay que avisarle:
+    public function getAuthPassword()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->PASSWORD_HASH;
     }
 }
