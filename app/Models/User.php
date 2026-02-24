@@ -17,6 +17,12 @@ class User extends Authenticatable
     // 2. Dile cuál es la llave primaria (por defecto es 'id', la tuya es 'COD_USUARIO')
     protected $primaryKey = 'COD_USUARIO';
 
+    // Cambia esto a true
+public $incrementing = true;
+
+// Asegúrate de que el tipo sea int
+protected $keyType = 'int';
+
     // 3. Dile qué columnas se pueden llenar
     protected $fillable = [
         'FK_COD_PERSONA',
@@ -36,4 +42,6 @@ class User extends Authenticatable
     {
         return $this->PASSWORD_HASH;
     }
+
+    
 }

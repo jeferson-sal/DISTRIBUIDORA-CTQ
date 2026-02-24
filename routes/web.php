@@ -2,10 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Redirige la raíz al login para probar directo
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Auth::routes();
+// COMENTA ESTA LÍNEA (ya que Fortify maneja sus propias rutas)
+// Auth::routes(); 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Asegúrate de que esta ruta apunte a tu vista home.blade.php
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth'])->name('home');
